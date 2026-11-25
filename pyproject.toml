@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fastsurfer-vinn-axial"
+version = "0.1.0"
+description = "Axial brain MRI segmentation and frozen VINN consistency loss."
+readme = "README.md"
+requires-python = ">=3.11"
+license-files = ["licenses/*.txt"]
+dynamic = ["dependencies"]
+
+[project.urls]
+Repository = "https://github.com/So-cean/fastsurfer-vinn-axial"
+
+[tool.setuptools.dynamic]
+dependencies = { file = ["requirements.txt"] }
+
+[tool.setuptools.packages.find]
+include = ["fastsurfer_vinn*"]
+
+[tool.setuptools.package-data]
+fastsurfer_vinn = ["configs/*.yaml"]

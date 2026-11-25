@@ -1,0 +1,8 @@
+numpy>=1.25
+nibabel>=5.4
+monai>=1.4
+scipy>=1.10.1
+PyYAML>=6
+matplotlib>=3.7
+tensorboard>=2.12
+Pillow

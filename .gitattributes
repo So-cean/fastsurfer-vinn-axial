@@ -1,0 +1,2 @@
+checkpoints/best.pth filter=lfs diff=lfs merge=lfs -text
+checkpoints/latest.pth filter=lfs diff=lfs merge=lfs -text

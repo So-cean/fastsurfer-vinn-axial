@@ -1,0 +1,24 @@
+# FastSurfer VINN Axial
+
+> A PyTorch model for axial brain MRI segmentation and a frozen segmentation consistency loss for MRI super-resolution, image reconstruction, and cross-modal synthesis.
+
+The inference CLI takes one skull-stripped T1-weighted, T2-weighted, or FLAIR NIfTI volume with exactly zero outside the brain. Use the native sampling grid when the axial in-plane spacings are equal. Use `--clip` for 0.5th–99.5th percentile clipping before the CLI's per-volume nonzero-voxel z-score. The CLI uses a scale factor of 1 mm divided by the axial in-plane spacing and returns 34 anatomical labels plus background on the input grid.
+
+The training loss is `fastsurfer_vinn.segmentation_loss.VINNSegLoss`. It takes aligned, brain-masked and normalized axial slices of shape `(B, 1, H, W)` and a scale factor supplied by the caller from the output grid. The default soft KL objective matches the frozen VINN class distributions for the reference and prediction. The original argmax-based Dice and cross-entropy objective is available with `mode="hard"`.
+
+On 20 BrainWeb simulated T1-weighted volumes, the mean whole-volume Dice was 0.9141 for white matter and 0.9253 for gray matter. Install a PyTorch build for your device before installing the project's Python dependencies.
+
+## Documentation
+
+- [Project overview and inference quick start](https://github.com/So-cean/fastsurfer-vinn-axial/blob/main/README.md)
+- [Training and segmentation consistency loss](https://github.com/So-cean/fastsurfer-vinn-axial/blob/main/TRAINING.md)
+- [BrainWeb-20 evaluation protocol and per-case scores](https://github.com/So-cean/fastsurfer-vinn-axial/blob/main/benchmarks/brainweb20.md)
+- [Public hMRI MPM echo 6 comparison with FastSurfer](https://github.com/So-cean/fastsurfer-vinn-axial/blob/main/benchmarks/hmri-mpm-echo6.md)
+- [FreeSurfer aseg label mapping](https://github.com/So-cean/fastsurfer-vinn-axial/blob/main/fastsurfer_vinn/utils/labels.py)
+
+## Related work
+
+- [Official FastSurfer repository](https://github.com/Deep-MI/FastSurfer)
+- [FastSurfer paper](https://doi.org/10.1016/j.neuroimage.2020.117012)
+- [FastSurferVINN paper](https://doi.org/10.1016/j.neuroimage.2022.118933)
+- [SynthSeg, the inspiration for label-guided synthetic training augmentation](https://github.com/BBillot/SynthSeg)
